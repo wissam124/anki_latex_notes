@@ -1,0 +1,73 @@
+% -*- coding: utf-8-unix -*-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The first part of the header needs to be copied
+%       into the note options in Anki.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% layout in Anki:
+\documentclass[11pt]{article}
+\usepackage[a4paper]{geometry}
+\geometry{paperwidth=.5\paperwidth,paperheight=100in,left=2em,right=2em,bottom=1em,top=2em}
+\pagestyle{empty}
+\setlength{\parindent}{0in}
+
+% encoding:
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% packages:
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{enumerate}
+
+% personal commands:
+\newcommand{\dotp}[2]{\langle#1,#2\rangle}
+\newcommand{\enscond}[2]{\lbrace#1,#2\rbrace}
+\newcommand{\pd}[2]{\frac{\partial#1}{\partial#2} }
+\newcommand{\umax}[1]{\underset{#1}{\max}\;}
+\newcommand{\umin}[1]{\underset{#1}{\min}\;}
+\newcommand{\uargmin}[1]{\underset{#1}{argmin}\;}
+\newcommand{\ulim}[2]{\underset{#1\to#2}{\lim}\;}
+\newcommand{\dlim}[2]{\underset{#1\to#2}{\longrightarrow}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\normtwo}[1]{\left\lVert#1\right\rVert_{2}}
+\newcommand{\norminf}[1]{\left\lVert#1\right\rVert_{\infty}}
+\newcommand{\normf}[1]{\left\lVert#1\right\rVert_{F}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\Aa}{\mathcal{A}}
+\newcommand{\Bb}{\mathcal{B}}
+\newcommand{\Ff}{\mathcal{F}}
+\newcommand{\Hh}{\mathcal{H}}
+\newcommand{\Pp}{\mathcal{P}}
+\newcommand{\qandq}{\quad\text{and}\quad}
+\newcommand{\qwhereq}{\quad\text{where}\quad}
+\newcommand{\qifq}{\quad\text{if}\quad }
+\newcommand{\qarrq}{\quad\Longrightarrow\quad }
+\newcommand{\pare}[1]{\left(#1\right)}
+\newcommand{\brac}[1]{\left[#1\right]}
+\newcommand{\function}[5]{\begin{array}[t]{lrcl}
+                            #1: & #2 & \longrightarrow & #3 \\
+                                & #4 & \longmapsto & #5
+                          \end{array}
+                          }
+\newcommand{\fdomdef}[3]{#1:#2\rightarrow#3}
+\newcommand*\dom{\mathop{}\!\mathrm{dom}}
+
+% Specific anki commands
+\renewcommand{\cite}[1]{\par\bigskip\hfill{\color{gray}\tiny\(\to\) #1}}
+\newcommand{\hide}[1]{\parbox{0cm}{\raisebox{-7pt}[0cm]{\dots}}\color{white}#1\color{black}}
+\let\olddots\dots
+\renewcommand{\dots}{\,\olddots\,}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
