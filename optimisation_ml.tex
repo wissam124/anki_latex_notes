@@ -1,0 +1,629 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The following line again needs to be copied
+% into Anki:
+\input{anki_live_header.tex}
+\input{anki_pdf_header.tex}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tags{optimisation_ML optimisation_non_convexe IASD}
+\begin{note}
+  \xplain{07079a38-e3a7-4e78-9387-3c6b75ec58ed} % ID
+  \begin{field}
+    1. Rappeler la définition de la matrice Hessienne pour une fonction
+    $f:\RR^n \rightarrow \RR$.\\
+    2. Rappeler les conditions nécessaires si $x$ est un minimum local.\\
+    3. A-t-on une réciproque?
+  \end{field}
+  \begin{field}
+    1. $$Hess(f)(x) = \pare{\frac{\partial^2 f}{\partial x_i \partial y_j}}_{1
+      \leq i \leq j \leq n}$$
+
+    2. $\forall x \in \RR^n$, si $x$ est un minimiseur de $f$, alors
+    \begin{itemize}
+    \item $\nabla f(x) = 0$
+    \item $Hess(f)(x) \succcurlyeq 0$
+    \end{itemize}
+
+    3. Si $\nabla f(x)=0$ et $Hess(f)(x) \succ 0$, alors $x$ est un
+    minimiseur local
+  \end{field}
+  \begin{field}
+    Contre-example pour la réciproque: considérer $f(x) = x^3$
+  \end{field}
+  \xplain{Optimisation pour ML}     % Source
+  \xplain{Optimisation non-convexe} % Section
+\end{note}
+
+\begin{note}
+  \xplain{b966699c-1abd-4313-b1b6-89516a7371a9} % ID
+  % Front
+  \begin{field}
+    Soit $x \in \RR^n$ et $f : \RR^n \mapsto \RR$
+    \begin{itemize}
+    \item $x$ est un point critique de premier ordre si $\dots$
+    \item $x$ est un point critique de deuxième ordre si $\dots$
+    \end{itemize}
+  \end{field}
+  % Back
+  \begin{field}
+    \begin{itemize}
+    \item $\nabla f(x) = 0$
+    \item $\nabla f(x) = 0$ et $Hess(f)(x) \succcurlyeq 0$
+    \end{itemize}
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}     % Source
+  \xplain{Optimisation non-convexe} % Section
+\end{note}
+
+\begin{note}
+  \xplain{490c0cfb-e047-466f-808a-40af5f13ad5a} % ID
+  \begin{field}
+    Supposons $f$ non convexe, L-lisse et de minimiseur $x_*$.\\
+    On effectue $T$ étapes de
+    gradient descent avec un pas $\frac{1}{L}$.\\
+    On note $T_{min} =
+    \uargmin{0\leq t \leq T}\nabla f(x_t)$. \\
+    1. Que peut-on dire sur $\norm{\nabla f(x_{T_{min}})}$? \\
+    2. Que peut-on dire sur $x_{T_{min}}$?
+  \end{field}
+  \begin{field}
+    $$\norm{\nabla f(x_{T_{min}})} \leq \sqrt{\frac{2L(f(x_0) -
+        f(x_*))}{T}}$$
+    On dit que $x_{T_{min}}$ est un point critique d'ordre 1 à
+    l'approximation $O\pare{\frac{1}{\sqrt{T}}}$
+  \end{field}
+  \begin{field}
+    \underline{Dém}: $f$ est L-lisse donc $f(x_{t+1}) \leq f(x_t) -
+    \frac{1}{2L}\norm{\nabla(f(x_{t}))}$
+  \end{field}
+  \xplain{Optimisation pour ML}     % Source
+  \xplain{Optimisation non-convexe} % Section
+\end{note}
+
+
+
+\begin{note}
+  \xplain{186acaa1-3214-4192-ab91-12e0fc7b619d}
+  % Front
+  \begin{field}
+    Énoncer le théorème de convergence vers un point critique de deuxième ordre
+    avec Gradient Descent.
+  \end{field}
+  % Back
+  \begin{field}
+    On suppose $f$ différentiable et L-lisse et que
+    \begin{itemize}
+    \item $f$ a un nombre fini de points critiques d'ordre 1.
+    \item $\forall M \in \RR,\{x \in \RR^n, f(x) \leq M\}$ est borné.
+    \end{itemize}
+    On considère la descente de gradient avec un pas constant $\eta \in
+    ]0, \frac{1}{L}[$\\
+    Pour presque tout $x_0$, la suite $\pare{x_t}_{t \in \NN}$
+    converge vers un point critique d'ordre deux.
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Optimisation non-convexe}                               % Section
+\end{note}
+
+
+% Descente de gradient
+\begin{note}
+  \xplain{ec972f4e-898a-4ee1-bd9a-69c3dffc8df8}
+  % Front
+  \begin{field}
+    On suppose $f$ différentiable.\\
+    Pour tout $x \in \RR^n$ on définit le 'gradient' de $f$ en $x$ par
+  \end{field}
+  % Back
+  \begin{field}
+    $$\nabla f(x) = \pare{\pd{f}{x_1}(x),\dots, \pd{f}{x_n}(x)}$$
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{bf4ebcd8-8b0e-4cbf-b339-63d727eea1ab}
+  % Front
+  \begin{field}
+    On considère une forme quadratique:
+    $$\function{f}{\RR^n}{\RR}{x}{\frac{1}{2}\dotp{x}{Mx} + \dotp{x}{b}}$$
+    % $$f(x) = \frac{1}{2}\dotp{x, Mx} + \dotp{x}{b}$$
+    avec $b \in \RR^n$.\\
+    1. Quel est le gradient de $f$?\\
+    2. En supposant $M$ inversible, comment s'écrit le minimum de $f$?
+  \end{field}
+  % Back
+  \begin{field}
+    1. $\nabla f(x) = Mx+b$\\
+    2. $x_*=-M^{-1}b$
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{bc542f6f-3ad5-40d5-bb0d-397c39cf3962}
+  % Front
+  \begin{field}
+    Pour une forme quadratique, peut-on écrire directement une
+    relation sur $x_{t+1} - x_*$?
+  \end{field}
+  % Back
+  \begin{field}
+    $x_{t+1} - x_* = (I - \alpha_tM)(x_t-x_*)$
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{d56d62a3-5d2d-45a1-bff8-5b1dc9cf5069}
+  % Front
+  \begin{field}
+    Dans l'algorithme de descente de gradient, que risque-t-on si le
+    pas $\alpha_t$ est trop grand?
+  \end{field}
+  % Back
+  \begin{field}
+    L'approximation linéaire n'est plus valable et on risque de voir
+    $f(x_t)_{t\in\NN}$ diverger.
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{6b70dc91-495a-43b2-a636-439c5f52246f}
+  % Front
+  \begin{field}
+    Quel est le principe du Exact Line Search pour choisir le pas pour
+    GD?
+  \end{field}
+  % Back
+  \begin{field}
+    À chaque étape t, on choisit $\alpha_t = \uargmin{\alpha}(f\pare{x_t -
+    \alpha\nabla f(x_t)})$
+    \\
+    i.e. on choisit le pas optimal tel que à $x_{t+1}$, la valeur de
+    la fonction $f$ soit minimale.
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{40fc0bf4-5c8b-481e-b0d6-c7ac3ce6993d}
+  % Front
+  \begin{field}
+    Si $f$ est L-lisse, on a $f(y) \leq f(x) + \dotp{\nabla f(x)}{y-x}
+      + \dots$
+  \end{field}
+  % Back
+  \begin{field}
+    $f(y) \leq f(x) + \dotp{\nabla f(x)}{y-x}
+      + \frac{L}{2}\norm{x-y}^2$
+  \end{field}
+  % Extra
+  \begin{field}
+    On pose $\function{\phi}{[0,1]}{\RR}{s}{f((1-s)x+sy)}$ et on écrit
+    $f(y)-f(x) = \phi(1) - \phi(0)$
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{b03cf739-0340-4805-9b55-a8f3551c900b}
+  % Front
+  \begin{field}
+    Définition fonction L-lisse
+  \end{field}
+  % Back
+  \begin{field}
+    On dit que $f$ est L-lisse si $$\forall x,y \in \RR^n, \norm{\nabla
+    f(x) - \nabla f(y)} \leq L\norm{x-y}$$
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{bd004517-38dc-4854-81dc-cb99d8bd20e6}
+  % Front
+  \begin{field}
+    Si $f$ est L-lisse, que peut-on dire sur la suite $\nabla f(x_t)$
+    (avec $x_t$ suite de GD avec un pas constant $\alpha_t=\frac{1}{L}$)?\\
+    Peut-on dire qqch sur la suite $f(x_t)$?
+  \end{field}
+  % Back
+  \begin{field}
+    $\ulim{t}{\infty}\norm{\nabla f(x_t)} = 0$ i.e $(x_t)_{t\in\NN}$ converge vers un
+    point critique d'ordre 1.\\
+    On ne peut en revanche pas dire à priori que $\ulim{t}{\infty}f(x_t)=f(x_*)$.
+
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{f5cf86b3-d17b-4699-b5c7-8742f02abeb5}
+  % Front
+  \begin{field}
+    Une forme quadratique de matrice symétrique $M$ est convexe ssi ...
+  \end{field}
+  % Back
+  \begin{field}
+    $M$ est semi-définie positive.
+  \end{field}
+  % Extra
+  \begin{field}
+    $f(y) = f(x) + \dotp{\nabla f(x)}{y-x} + \frac{1}{2}\dotp{y-x}{M(y-x)}$
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+
+\begin{note}
+  \xplain{d772b713-8988-49bf-b4a1-f7860dc1535c}
+  % Front
+  \begin{field}
+    Soit $f$ convexe et L-lisse.\\
+    On considère la descente de gradient avec un pas constant $\alpha_t
+    = \frac{1}{L}$.\\
+    Que peut-on dire sur $f(x_t) - f(x_*)$ pour tout $t \in \NN$?
+  \end{field}
+  % Back
+  \begin{field}
+    $$0\leq f(x_t) - f(x_*) \leq \frac{2L}{t+4}\norm{x_0-x_*}^2$$
+  \end{field}
+  % Extra
+  \begin{field}
+    \begin{itemize}
+    \item Mq $\norm{x_{t+1}-x_*}^2 \leq \norm{x_t-x_*}^2$
+    \item Établir une inégalité de récurrence sur $f(x_t) - f(x_*)$
+    \end{itemize}
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{e30a6b7d-e798-4f42-9d7b-51f1bafc6241}
+  % Front
+  \begin{field}
+    Si $f$ est différentiable, alors elle est convexe ssi ...
+  \end{field}
+  % Back
+  \begin{field}
+    $$\forall x,y \in \RR^n, f(y) \geq f(x) + \dotp{\nabla
+      f(x)}{y-x}$$
+  \end{field}
+  % Extra
+  \begin{field}
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{6b65a613-094b-4d37-b663-168675c1f610}
+  % Front
+  \begin{field}
+    Soit $f$ convexe et L-lisse.\\
+    Que peut-on dire sur la vitesse de convergence de $f(x_t)$ (algo
+    GD)?\\
+    Que peut-on dire sur la vitesse de convergence de $\ln(f(x_t) - f(x_*))$?
+  \end{field}
+  % Back
+  \begin{field}
+    $f(x_t)$ converge vers $f(x_*)$ avec une vitesse en
+    $\mathcal{O}(\frac{1}{t})$.\\
+    $\ln(f(x_t) - f(x_*))$ converge vers 0 linéairement en $\ln t$.
+
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{7198a086-5372-4b1d-afa5-ae776da43419}
+  % Front
+  \begin{field}
+    Définition fonction $\mu$-fortement convexe
+  \end{field}
+  % Back
+  \begin{field}
+    Soit $f$ une fonction différentiable et $\mu > 0$.\\
+    On dit que $f$ est $\mu$-fortement convexe ssi:
+    $$\forall x,y \in \RR^n, f(y) \geq f(x) + \dotp{\nabla f(x)}{y-x}
+    + \frac{\mu}{2}\norm{y-x}^2$$
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+
+\begin{note}
+  \xplain{5051fcbb-e8a1-4fd9-b262-7dcef1937f04}
+  % Front
+  \begin{field}
+    Pour tout $\mu > 0$, $f$ est $\mu$-fortement convexe ssi $\dots$
+  \end{field}
+  % Back
+  \begin{field}
+    $x \mapsto f(x) - \frac{\mu}{2}\norm{x}^2$ est convexe.
+  \end{field}
+  % Extra
+  \begin{field}
+    Utiliser la propriété permettant d'obtenir un minorant d'une
+    fonction convexe en tout point.
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{1225568d-0961-48a6-9cac-c05d6314e7ad}
+  % Front
+  \begin{field}
+    Théorème de convergence de GD pour une fonction L-lisse et
+    $\mu$-fortement convexe.
+  \end{field}
+  % Back
+  \begin{field}
+    $\forall t \in \NN, f(x_t)-f(x_*)\leq
+    \frac{L}{2}\pare{1-\frac{\mu}{L}}^t\norm{x_0-x_*}^2$
+  \end{field}
+  % Extra
+  \begin{field}
+    1. Montrer que $\norm{x_{t+1}-x_*}^2 \leq
+    \pare{1-\frac{\mu}{L}}\norm{x_t-x_*}^2$\\
+    2. Utiliser propriété L-lisse et $\nabla f(x_*)=0$
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{cd638d46-9422-4daa-8a45-e8310ccfe757}
+  % Front
+  \begin{field}
+    Soit $f$ une fonction $\mu$-fortement convexe et
+    L-lisse. Qu'appelle-t-on le nombre de conditionnement?
+  \end{field}
+  % Back
+  \begin{field}
+    $K = \frac{L}{\mu} \geq 1$
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{aca8d44d-6270-4212-bea6-730fffc0cba5}
+  % Front
+  \begin{field}
+    On suppose $f$ une forme quadratique de matrice symétrique $M$.
+    Quand avons-nous $f$ $\mu$-fortement convexe?
+  \end{field}
+  % Back
+  \begin{field}
+    En supposant que $\lambda_1,\dots,\lambda_n$ sont les valeurs
+    propres ordonnées de $M$, $f$ est $\lambda_n$-fortement convexe ssi $\lambda_n>0$.
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Descente de gradient}                               % Section
+\end{note}
+
+
+\tags{optimisation_ML analyse_convexe IASD}
+\begin{note}
+  \xplain{3ade79c8-6c47-4d2f-b668-b3bac3436552}
+  % Front
+  \begin{field}
+    Soit $f:\RR^N \mapsto \RR \cup \{+\infty\}$, coercive, sci, et
+    $f\not\equiv +\infty$.\\
+    $f$ admet-elle un minimum sur $\RR^N$?
+  \end{field}
+  % Back
+  \begin{field}
+    $f$ admet un minimum sur $\RR^N$ et $\min f < \infty$
+  \end{field}
+  % Extra
+  \begin{field}
+    Restreindre $f$ à un compact.
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Analyse convexe}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{540524d1-a931-4506-816d-954f7a270d38}
+  % Front
+  \begin{field}
+    Énoncer le théorème de caractérisation de fonctions convexes, sci,
+    propre comme enveloppe supérieure de fonctions affines.
+  \end{field}
+  % Back
+  \begin{field}
+    Soit $\fdomdef{f}{\RR^N}{\RR\cup\{+\infty\}}$ convexe, sci, propre.\\
+    Alors $\forall x \in \RR^N, f(x)=\sup\{l(x)|l \text{ fonction
+      affine tq } l\leq f\}$
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Analyse convexe}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{21aa30a5-bb83-42c7-8b6f-4bb9042c3313}
+  % Front
+  \begin{field}
+    Définition d'une fontion propre
+  \end{field}
+  % Back
+  \begin{field}
+    On dit que $\fdomdef{f}{\RR^N}{\RR\cup\{\pm\infty\}}$ est propre si:
+    \begin{itemize}
+      \item $\dom{f} = \{x\in\RR^N|f(x)<+\infty\} \neq \emptyset$
+      \item $\forall x \in \RR^N, f(x) > - \infty$
+    \end{itemize}
+
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Analyse convexe}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{20afdb6f-972e-49e2-a9a7-104bb0e06a2a}
+  % Front
+  \begin{field}
+    Théorème de projection d'un point sur un convexe.
+  \end{field}
+  % Back
+  \begin{field}
+    Soit $C \subset \RR^N$ un ensemble convexe, fermé et non vide.\\
+    Pour tout $x \in \RR^N$, il existe un unique élément $p \in C$ tel
+    que $$\norm{x-p} = \umin{c \in C}\norm{x-c} = d(x,C)$$
+    De plus, $p$ est l'unique élément de C tel que $\dotp{x-p}{c-p}
+    \leq 0$ pour tout $c \in C$
+  \end{field}
+  % Extra
+  \begin{field}
+    Construire une fonction coercive, sci, et $\not\equiv +\infty$.
+    Vérifier l'unicité du minimiseur par l'absurde.
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Analyse convexe}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{aba6ed57-921e-47a8-886c-4d97550faa8d}
+  % Front
+  \begin{field}
+    Définition sous-gradient
+  \end{field}
+  % Back
+  \begin{field}
+    Soit $f$ une fonction convexe, propre et $p \in \RR^N$.\\
+    On dit que $p$ est un sous-gradient de $f$ en $x$ si:
+    $$\forall y \in \RR^N, f(y) \geq f(x) + \dotp{p}{y-x}$$
+    On le note $p \in \partial{f}(x)$.
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Analyse convexe}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{838539c8-8578-4fa3-80a6-e7c339ebc294}
+  % Front
+  \begin{field}
+    La fonction indicatrice $\chi_A$ est sci ssi ...
+  \end{field}
+  % Back
+  \begin{field}
+    A est fermé.
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Analyse convexe}                               % Section
+\end{note}
+
+\begin{note}
+  \xplain{37320fdd-c891-4973-bf3f-6a30a79900a6}
+  % Front
+  \begin{field}
+    Que peut-on dire sur l'ensemble de niveau inférieur d'une fonction
+    convexe?\\
+    La réciproque est-elle vraie?
+  \end{field}
+  % Back
+  \begin{field}
+    C'est un ensemble convexe.\\
+    Non, considérer par exemple $x \mapsto \sqrt{\norm{x}
+    }$
+  \end{field}
+  % Extra
+  \begin{field}
+
+  \end{field}
+  \xplain{Optimisation pour ML}                               % Source
+  \xplain{Analyse convexe}                               % Section
+\end{note}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
